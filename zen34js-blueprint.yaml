@@ -4,7 +4,7 @@ blueprint:
     Use the Zooz ZEN34 remote to trigger Scenes and control devices based on varying scenes. 
 
     This Blueprint is currently configured for the zwaveJS platform.
-    
+
   domain: automation
 
   input:
@@ -12,11 +12,10 @@ blueprint:
       name: Zooz Zen34
       description: "List of available Zooz ZEN34 switch."
       selector:
-         device:
-            integration: zwave_js
-            manufacturer: Zooz
-            model: ZEN34
-
+        device:
+          integration: zwave_js
+          manufacturer: Zooz
+          model: ZEN34
 
     1x_tap_up:
       name: Tap up 1x
@@ -81,7 +80,6 @@ blueprint:
 
 mode: single
 
-
 variables:
   logger: blueprint.zwave_scene_activation
   device_id: !input zwave_device
@@ -92,71 +90,71 @@ trigger:
 
 action:
   - choose:
-   # IF triggered node_id is zwave_nodeid
+      # IF triggered node_id is zwave_nodeid
       - conditions:
           - condition: template
             value_template: "{{ trigger.event.data.device_id == device_id }}"
         sequence:
           - choose:
-            # IF 1x tap up
+              # IF 1x tap up
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.label == Scene 001 and trigger.event.data.value == KeyPressed }}"
+                    value_template: "{{ trigger.event.data.label == 'Scene 001' and trigger.event.data.value == 'KeyPressed' }}"
                 sequence: !input 1x_tap_up
-            # IF 1x tap down
+              # IF 1x tap down
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.label == Scene 002 and trigger.event.data.value == KeyPressed }}"
+                    value_template: "{{ trigger.event.data.label == 'Scene 002' and trigger.event.data.value == 'KeyPressed' }}"
                 sequence: !input 1x_tap_down
-            # IF 2x tap up
+              # IF 2x tap up
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.label == Scene 001 and trigger.event.data.value ==  KeyPressed2x }}"
+                    value_template: "{{ trigger.event.data.label == 'Scene 001' and trigger.event.data.value == 'KeyPressed2x' }}"
                 sequence: !input 2x_tap_up
-            # IF 2x tap down
+              # IF 2x tap down
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.label == Scene 002 and trigger.event.data.value ==  KeyPressed2x }}"
+                    value_template: "{{ trigger.event.data.label == 'Scene 002' and trigger.event.data.value == 'KeyPressed2x' }}"
                 sequence: !input 2x_tap_down
-            # IF 3x tap up
+              # IF 3x tap up
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.label == Scene 001 and trigger.event.data.value == KeyPressed3x }}"
+                    value_template: "{{ trigger.event.data.label == 'Scene 001' and trigger.event.data.value == 'KeyPressed3x' }}"
                 sequence: !input 3x_tap_up
-            # IF 3x tap down
+              # IF 3x tap down
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.label == Scene 002 and trigger.event.data.value == KeyPressed3x }}"
+                    value_template: "{{ trigger.event.data.label == 'Scene 002' and trigger.event.data.value == 'KeyPressed3x' }}"
                 sequence: !input 3x_tap_down
-            # IF 4x tap up
+              # IF 4x tap up
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.scene_id == Scene 001 and trigger.event.data.value == KeyPressed4x }}"
+                    value_template: "{{ trigger.event.data.label == 'Scene 001' and trigger.event.data.value == 'KeyPressed4x' }}"
                 sequence: !input 4x_tap_up
-            # IF 4x tap down
+              # IF 4x tap down
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.label == Scene 002 and trigger.event.data.value == KeyPressed4x }}"
+                    value_template: "{{ trigger.event.data.label == 'Scene 002' and trigger.event.data.value == 'KeyPressed4x' }}"
                 sequence: !input 4x_tap_down
-            # IF 5x tap up
+              # IF 5x tap up
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.label == Scene 001 and trigger.event.data.value == KeyPressed5x }}"
+                    value_template: "{{ trigger.event.data.label == 'Scene 001' and trigger.event.data.value == 'KeyPressed5x' }}"
                 sequence: !input 5x_tap_up
-            # IF 5x tap down
+              # IF 5x tap down
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.label == Scene 002 and trigger.event.data.value == KeyPressed5x }}"
+                    value_template: "{{ trigger.event.data.label == 'Scene 002' and trigger.event.data.value == 'KeyPressed5x' }}"
                 sequence: !input 5x_tap_down
-            # IF hold up
+              # IF hold up
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.label == Scene 001 and trigger.event.data.value == KeyHeld }}"
+                    value_template: "{{ trigger.event.data.label == 'Scene 001' and trigger.event.data.value == 'KeyHeld' }}"
                 sequence: !input hold_up
-            # IF hold down
+              # IF hold down
               - conditions:
                   - condition: template
-                    value_template: "{{ trigger.event.data.label == Scene 002 and trigger.event.data.value == KeyHeld }}"
+                    value_template: "{{ trigger.event.data.label == 'Scene 002' and trigger.event.data.value == 'KeyHeld' }}"
                 sequence: !input hold_down
             # ELSE: unhandled label/value
             default:
